@@ -1,0 +1,8 @@
+{
+	"ABLOG-MAIN":{
+		"HOST":"<host>",
+		"BASE_NAME":"<db-name>",
+		"USER_NAME":"<username>",
+		"USER_PASSWD":"<password>"
+	}
+}

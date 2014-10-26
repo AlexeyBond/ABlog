@@ -1,0 +1,4 @@
+config/*
+!config/*.cfg.template
+*.sublime-workspace
+*.sql
