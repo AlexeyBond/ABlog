@@ -34,9 +34,9 @@ class ThreadedHTTPServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer)
 # Server run procedure
 def runServer( ):
 	global SERVER_PORT
-	global REQUEST_HANDLER_CLASS
+	global SERVER_REQUEST_HANDLER_CLASS
 	try:
-		srv = ThreadedHTTPServer(('', SERVER_PORT), REQUEST_HANDLER_CLASS)
+		srv = ThreadedHTTPServer(('', SERVER_PORT), SERVER_REQUEST_HANDLER_CLASS)
 		print 'Starting server ...'
 		srv.serve_forever()
 	except KeyboardInterrupt:
