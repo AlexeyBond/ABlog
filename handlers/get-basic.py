@@ -1,18 +1,5 @@
 # coding=UTF-8
 
-def parseUrlParameters(url):
-	parstart = url.find('?') + 1
-	pardict = {}
-	if parstart != 0:
-		pars = url[parstart:].split('&')
-		for par in pars:
-			pair = par.split('=')
-			if len(pair) != 2:
-				continue
-			pardict[pair[0]] = pair[1]
-	return pardict
-
-
 @GETRequestHandler('^/src/view\\?',template='SRCVIEW_FILE',parse_url_args=True)
 @GETRequestHandler('^/src$',template='SRCVIEW_ROOT')
 @GETRequestHandler('^/src/tree$',template='SRCVIEW_TREE')

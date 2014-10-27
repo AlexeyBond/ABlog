@@ -47,12 +47,6 @@ def renderPageTemplate(templname,ostream,**kwargs):
 		return None
 	return PAGE_TEMPLATES[templname](ostream,**kwargs)
 
-def loadPageTemplates( ):
-	global PAGE_TEMPLATES_DIR_NAME
-	global PAGE_TEMPLATES_COMMON_DIR_NAME
-	print '---   Loading page templates   ---'
-	loadFiles(relative=PAGE_TEMPLATES_COMMON_DIR_NAME)
-	loadFiles(relative=PAGE_TEMPLATES_DIR_NAME)
-	print '--- End loading page templates ---'
+loadModuleGroup('PAGE-TEMPLATES-COMMON',PAGE_TEMPLATES_COMMON_DIR_NAME)
+loadModuleGroup('PAGE-TEMPLATES',PAGE_TEMPLATES_DIR_NAME)
 
-loadPageTemplates( )

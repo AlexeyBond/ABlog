@@ -9,6 +9,7 @@ class DatabaseConnection:
 		if self.connected == False:
 			print '!!! DB %s@%s not connected. Trying to connect again.'%(
 				self.db_name,self.db_host)
+			self.connect( )
 			if self.connected == False:
 				print '!!! Request failed'
 				return None
@@ -95,8 +96,12 @@ def dbRequestHandler(db_name,request_name):
 def makeDBRequest(request_name,**kwargs):
 	if request_name not in DB_REQUEST_HANDLERS:
 		print '!!! DB request %s not found'%(request_name)
+		return None
 	return DB_REQUEST_HANDLERS[request_name](**kwargs)
 
+# Stores result of function call for <seconds>
+# !WARNING!
+# Doesn't care if function is called with other arguments
 def storeResult(seconds):
 	def storeResultDecorator(func):
 		resultStorage = {'result':None,'time':0}
@@ -110,14 +115,9 @@ def storeResult(seconds):
 		return storeResultWrapper
 	return storeResultDecorator
 
-def loadDBRequestHandlers( ):
-	global DB_REQUEST_HANDLERS_DIR
-	print '---   Loading DB request handlers    ---'
-	loadFiles(relative=DB_REQUEST_HANDLERS_DIR)
-	print '--- End loading DB request handlers  ---'
+loadModuleGroup('DB-REQUEST-HANDLERS',DB_REQUEST_HANDLERS_DIR)
 
-loadDBRequestHandlers( )
-
+#
 def initDBConnections( ):
 	global DB_CONFIG_PATH
 	global DB_CONNECTIONS
@@ -126,6 +126,8 @@ def initDBConnections( ):
 		DB_CONNECTIONS[k] = DatabaseConnection(v)
 		print 'Initialized DB connection ',k
 
+#
+@callOnShutdown
 def closeDBConnections( ):
 	global DB_CONNECTIONS
 	for name,conn in DB_CONNECTIONS.items():

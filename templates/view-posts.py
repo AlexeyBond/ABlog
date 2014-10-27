@@ -21,7 +21,7 @@ def template_Posts_page(url_args,user=None,session=None,**kwargs):
 	</div>"""
 	#### Posts
 	yield """<div class='col-md-6 col-lg-8'>"""
-	first = int(url_args.get('start',10))
+	first = int(url_args.get('start',0))
 	count = int(url_args.get('count',10))
 	posts = makeDBRequest('GET-POSTS',first=first,count=count)
 	if posts == None:

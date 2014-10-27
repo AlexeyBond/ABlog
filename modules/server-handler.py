@@ -58,7 +58,7 @@ class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 REQUEST_HANDLERS_DIR_NAME = 'handlers'
 
-REQUEST_HANDLER_CLASS = myHandler
+SERVER_REQUEST_HANDLER_CLASS = myHandler
 
 REQUEST_HANDLERS_DIR_PATH = rel2absPath(REQUEST_HANDLERS_DIR_NAME)
 
@@ -86,15 +86,4 @@ def selectPathHandler(path,hlist):
 			return p[1];
 	return None
 
-def loadRequestHandlers():
-	# global REQUEST_HANDLERS_DIR_PATH
-	# filelist = os.listdir(REQUEST_HANDLERS_DIR_PATH)
-	global REQUEST_HANDLERS_DIR_NAME
-	print '---   Loading request handlers   ---'
-	loadFiles(relative=REQUEST_HANDLERS_DIR_NAME)
-	# for fn in filelist:
-	# 	if fn.endswith('.py'):
-	# 		loadFile(os.path.join(REQUEST_HANDLERS_DIR_PATH,fn))
-	print '--- End loading request handlers ---'
-
-loadRequestHandlers( )
+loadModuleGroup('HTTP-REQUEST-HANDLERS',REQUEST_HANDLERS_DIR_NAME)
