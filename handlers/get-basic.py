@@ -5,6 +5,7 @@
 @GETRequestHandler('^/src/tree$',template='SRCVIEW_TREE')
 @GETRequestHandler('^/posts',template='VIEW-POSTS',parse_url_args=True)
 @GETRequestHandler('^/home',template='HOMEPAGE')
+@GETRequestHandler('^/about',template='ABOUTPAGE')
 def get__template(handler,template,parse_url_args=False,**kwargs):
 	url_args = parseUrlParameters(handler.path) if parse_url_args else None
 	# 
