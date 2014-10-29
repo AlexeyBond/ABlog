@@ -3,10 +3,16 @@ import re
 import cgi
 
 class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+	def read_cookies(self):
+		if 'Cookie' not in self.headers:
+			self.cookies = {}
+		else:
+			self.cookies = parseCookies(self.headers['Cookie'])
+
 	def send_headers(self,headers):
 		if headers != None:
-			for k, v in headers.items():
-				self.send_header(k,v)
+			for h in headers:
+				self.send_header(h[0],h[1])
 
 	def do_GET_REDIRECT(self,location,headers=None):
 		self.send_response(303)
@@ -43,12 +49,14 @@ class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		self.start_response(404)
 		renderPageTemplate('ERROR_404',self.wfile)
 	def do_GET(self):
+		self.read_cookies( )
 		hfunc = selectPathHandler(self.path,REQUEST_HANDLERS_GET)
 		if hfunc != None:
 			hfunc(handler=self)
 		else:
 			self.do_GET_404( )
 	def do_POST(self):
+		self.read_cookies( )
 		hfunc = selectPathHandler(self.path,REQUEST_HANDLERS_POST)
 		if hfunc != None:
 			hfunc(handler=self)

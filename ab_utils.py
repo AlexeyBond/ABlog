@@ -98,3 +98,12 @@ def parseUrlParameters(url):
 			pardict[pair[0]] = pair[1]
 	return pardict
 
+#
+def parseCookies(cookie_string):
+	cpairstrs = cookie_string.replace(';',' ').split()
+	cookies = {}
+	for s in cpairstrs:
+		pair = s.split('=')
+		cookies[pair[0]] = pair[1]
+	return cookies
+

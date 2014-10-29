@@ -5,7 +5,7 @@ def template_srcview_root(**kwargs):
 	return """<!DOCTYPE html>
 	<html>
 		<head>
-			<title>Source view</title>
+			<title>Просмотр исходного кода</title>
 		</head>
 		<frameset rows='*' cols='20%,*'>
 			<frame name='SRCVIEW_FRAME_TREEVIEW' src='/src/tree' />
@@ -36,7 +36,7 @@ def template_srcview_root(**kwargs):
 @pageTemplate('SRCVIEW_FILE')
 def template_srcview_file(url_args,**kwargs):
 	global RESOURCE_PATH_VALIDATION_EXPRESSION # From /handlers/get-resource.py
-	file_data = 'No file selected'
+	file_data = 'Файл не выбран'
 	if 'file' in url_args:
 		fpath = url_args['file']
 		if (RESOURCE_PATH_VALIDATION_EXPRESSION.search(fpath) == None and

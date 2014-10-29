@@ -8,6 +8,6 @@ def template_error_404(**kwargs):
 	yield """
 	<span align='center'>
 		<h1>404</h1>
-		<h1>Not found !</h1>
+		<h1>Страница не найдена !</h1>
 	</span>"""
 	yield _template_PAGEFOOTER()

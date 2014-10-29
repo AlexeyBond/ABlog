@@ -6,7 +6,7 @@ def _template_user_list_table(count=10):
 	<div class='col-md-3 col-lg-2'>
 		<div class="list-group">
 			<div class="list-group-item">
-				<h3 class='list-group-item-heading'>Users</h3>
+				<h3 class='list-group-item-heading'>Пользователи</h3>
 			</div>"""
 	if top_users is None:
 		yield """
@@ -20,11 +20,12 @@ def _template_user_list_table(count=10):
 			yield x['id']
 			yield "'>"
 			yield x['name']
-			yield '</a>'
-			if x['email'] != None:
-				yield '(<a href="mailto:'
-				yield x['email']
-				yield '">email</a>)'
+			yield "</a> (<a href='/posts?user="
+			yield x['id']
+			yield "'>"
+			yield str(x['nposts'])
+			yield '</a>)'
+			
 			yield '</p></div>'
 	yield """
 		</div>
