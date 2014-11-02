@@ -7,6 +7,8 @@ def template_Posts_page(url_args,session=None,**kwargs):
 	first = int(url_args.get('start',0))
 	count = int(url_args.get('count',10))
 	userid = url_args.get('user',None)
+	if first < 0:
+		first = 0
 	if userid != None:
 		userid = int(userid)
 	page_title = 'ABlog - Записи'
@@ -19,6 +21,7 @@ def template_Posts_page(url_args,session=None,**kwargs):
 		else:
 			userid = None
 	posts = makeDBRequest('GET-POSTS',first=first,count=count,user_id=userid)
+	total_posts = makeDBRequest('GET-POSTS-COUNT',user_id=userid)
 	###
 	yield _template_PAGEHEAD(pagetitle=page_title)
 	yield _template_NAVBAR()
@@ -38,6 +41,43 @@ def template_Posts_page(url_args,session=None,**kwargs):
 		<p align='center' color='red'>Ошибка обращения к базе данных</p>
 		"""
 	else:
+		def pageswitch():
+			yield """
+					<div class='text-center'>
+					<div class='btn-group'>
+						<a class='btn btn-default' href='/posts?start=0&count=""",str(count),"""'>
+							<span class="glyphicon glyphicon-fast-backward"></span>
+						</a>
+						<a class='btn btn-default' """
+			if first <= 0:
+				yield "disabled='disabled'"
+			else:
+				yield "href='/posts?start=",str(first-count),"&count=",str(count),"'"
+			yield """>
+							<span class="glyphicon glyphicon-backward"></span>
+						</a>
+						<a class='btn btn-default' href='#'>
+							""",str(first+1),'..',str(first+count),"""
+						</a>
+						<a class='btn btn-default' """
+			if first+count >= total_posts:
+				yield "disabled='disabled'"
+			else:
+				yield "href='/posts?start=",str(first+count),"&count=",str(count),"'"
+			yield """>
+							<span class="glyphicon glyphicon-forward" ></span>
+						</a>
+						<a class='btn btn-default' """
+			if count >= total_posts:
+				yield "disabled='disabled'"
+			else:
+				yield "href='/posts?start=",str(total_posts-count),"&count=",str(count),"'"
+			yield """>
+							<span class="glyphicon glyphicon-fast-forward"></span>
+						</a>
+					</div>
+					</div><br/>"""
+		yield pageswitch()
 		for post in posts:
 			yield """
 				<div class='panel panel-default'>"""
@@ -68,6 +108,7 @@ def template_Posts_page(url_args,session=None,**kwargs):
 			yield '</a>'
 			###
 			yield """</div></div>"""
+		yield pageswitch( )
 	yield """</div>"""
 	#### Users list
 	yield _template_user_list_table()

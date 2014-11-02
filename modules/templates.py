@@ -10,7 +10,8 @@ PAGE_TEMPLATES_DIR_NAME = 'templates'
 # Аццкый ШАБЛОНИЗАТОР
 def pageTemplate(templname):
 	def writeObject(stream, obj):
-		if type(obj).__name__ == 'generator':
+		if (type(obj).__name__ == 'generator' or
+			type(obj) is tuple):
 			for x in obj:
 				writeObject(stream,x)
 		elif type(obj) is str:

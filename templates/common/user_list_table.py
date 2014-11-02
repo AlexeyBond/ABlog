@@ -21,11 +21,11 @@ def _template_user_list_table(count=10):
 			yield x['id']
 			yield "'>"
 			yield x['name']
-			yield "</a> (<a href='/posts?user="
+			yield "</a> <a href='/posts?user="
 			yield x['id']
-			yield "'>"
+			yield "'><span class='badge'>"
 			yield str(x['nposts'])
-			yield '</a>)'
+			yield '</span></a>'
 			n = n + 1
 			if n >= count:
 				break

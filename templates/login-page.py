@@ -14,7 +14,7 @@ def template_login_page(url_args,**kwargs):
 	####
 	if 'error' in url_args:
 		yield """
-		<p class='bg-danger'>Неверный логин или пароль.</p>"""
+		<div class="alert alert-danger" role="alert">Неверный логин или пароль.</div>"""
 	####
 	if 'login' in url_args:
 		yield _template_LOGIN_FORM(login=url_args['login'])
