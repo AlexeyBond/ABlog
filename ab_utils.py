@@ -110,5 +110,5 @@ def parseCookies(cookie_string):
 
 #
 REGEXP_VALID_PASSWORD = re.compile('^([a-zA-Z0-9_]){4,16}$')
-REGEXP_VALID_LOGIN = re.compile('^([a-zA-Z0-9_]){,16}$')
+REGEXP_VALID_LOGIN = re.compile('^([a-zA-Z0-9_]){1,16}$')
 
