@@ -45,7 +45,7 @@ def request__identify_user_by_cookie(db,cookies,**kwargs):
 		AND
 			user_id = session_user_id;
 		""",
-		('user_id','start-time','user_name'),
+		('user_id','start_time','user_name'),
 		cookie=cookie
 		)
 	if reqres == None:

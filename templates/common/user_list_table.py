@@ -2,11 +2,12 @@
 
 def _template_user_list_table(count=10):
 	top_users = makeDBRequest('RANDOM-20-USERS')
+	n = 0
 	yield """
 	<div class='col-md-3 col-lg-2'>
 		<div class="list-group">
 			<div class="list-group-item">
-				<h3 class='list-group-item-heading'>Пользователи</h3>
+				<a href='/users' class='list-group-item-heading'>Пользователи</p>
 			</div>"""
 	if top_users is None:
 		yield """
@@ -25,6 +26,9 @@ def _template_user_list_table(count=10):
 			yield "'>"
 			yield str(x['nposts'])
 			yield '</a>)'
+			n = n + 1
+			if n >= count:
+				break
 			
 			yield '</p></div>'
 	yield """

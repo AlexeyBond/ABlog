@@ -11,7 +11,7 @@ def makeNewCookie(user_id,user_addr):
 	return cookieval
 
 @POSTRequestHandler('^/login')
-def post__login(handler,redirect=False,**kwargs):
+def post__login(handler,**kwargs):
 	url_args = parseUrlParameters(handler.path)
 	redirect_location = url_args['from'] if 'from' in url_args else '/home'
 	redirect_headers = []
@@ -34,5 +34,4 @@ def post__login(handler,redirect=False,**kwargs):
 			redirect_location = '/login?error=1&from='+redirect_location+'&login='+login
 	else:
 		redirect_location = '/login?error=1&from='+redirect_location
-	redirect_location = '/home' if redirect == False else handler.path[11:]
 	handler.do_GET_REDIRECT(redirect_location,headers=redirect_headers)

@@ -6,6 +6,7 @@ import threading
 import cgi
 import os
 import sys
+import re
 
 
 # Determine working directory
@@ -106,4 +107,8 @@ def parseCookies(cookie_string):
 		pair = s.split('=')
 		cookies[pair[0]] = pair[1]
 	return cookies
+
+#
+REGEXP_VALID_PASSWORD = re.compile('^([a-zA-Z0-9_]){4,16}$')
+REGEXP_VALID_LOGIN = re.compile('^([a-zA-Z0-9_]){,16}$')
 

@@ -8,7 +8,7 @@ def _template_LOGIN_FORM(login=None):
 			<div class="input-group">
 				<input class="form-control" placeholder='Логин' type='text' name='login' """
 	if login != None:
-		yield """valve='%s'"""%(login)
+		yield """value='%s'"""%(login)
 	yield """ />
 			</div>
 		</div>

@@ -7,6 +7,7 @@
 @GETRequestHandler('^/home',template='HOMEPAGE')
 @GETRequestHandler('^/login',template='LOGIN-PAGE',parse_url_args=True)
 @GETRequestHandler('^/about',template='ABOUTPAGE')
+@GETRequestHandler('^/new$',template='NEW-POST')
 def get__template(handler,template,parse_url_args=False,**kwargs):
 	url_args = parseUrlParameters(handler.path) if parse_url_args else None
 	session = makeDBRequest('IDENTIFY-USER-BY-COOKIES',cookies=handler.cookies)
