@@ -7,13 +7,15 @@ def request__get_user_info(db,userid,**kwargs):
 		"""
 		SELECT
 			user_id,user_name,
-			user_passwd,user_email
+			user_passwd,user_email,
+			user_reg_time,user_avatar_path,
+			user_about_text
 		FROM
 			{db_name}.USERS
 		WHERE
 			user_id = {user_id}
 		""",
-		('id','name','passwd','email'),
+		('id','name','passwd','email','reg_time','avapath','about'),
 		user_id=str(userid) )
 	if reqres == None:
 		return None
@@ -69,3 +71,42 @@ def request__get_user_info(db,name,passwd,**kwargs):
 		""",
 		name=name,
 		passwd=passwd)
+
+@dbRequestHandler('ABLOG-MAIN','SET-USER-AVATAR-PATH')
+def request__set_user_avatar_path(db,userid,path,**kwargs):
+	db._make_request(
+		"""
+		UPDATE
+			ABLOG_DB.USERS
+				SET user_avatar_path="{path}"
+			WHERE
+				user_id={userid};
+		""",
+		userid=userid,
+		path=path)
+
+@dbRequestHandler('ABLOG-MAIN','SET-USER-DATA')
+def request__set_user_avatar_path(db,userid,email,about,**kwargs):
+	if about == None:
+		about = 'NULL'
+	else:
+		about = '\"' + about.replace('\"','\\\"') + '\"'
+	#
+	if email == None or email == '':
+		email = 'NULL'
+	else:
+		email = '\"' + email.replace('\"','\\\"') + '\"'
+	#
+	db._make_request(
+		"""
+		UPDATE
+			ABLOG_DB.USERS
+				SET
+					user_email={email},
+					user_about_text={about}
+			WHERE
+				user_id={userid};
+		""",
+		userid=userid,
+		about=about,
+		email=email)

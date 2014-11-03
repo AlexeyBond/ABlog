@@ -2,6 +2,7 @@
 
 @dbRequestHandler('ABLOG-MAIN','NEW-POST')
 def request__authenticate_user(db,userid,posttext,**kwargs):
+	posttext = posttext.replace('\"','\\\"')
 	reqres = db._make_request(
 		"""
 		INSERT

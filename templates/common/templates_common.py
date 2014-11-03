@@ -51,3 +51,5 @@ def _template_GRID_COLUMN_START(width=1,offset=0):
 	else:
 		return "<div class='col-md-%s col-md-offset-%s'>"%(width,offset)
 
+def _template_ALERT(text):
+	return '<div class="alert alert-danger" role="alert">',text,'</div>'

@@ -3,7 +3,8 @@
 
 def _template_NAVBAR():
 	yield """
-		<div class="navbar navbar-default navbar-fixed" role="navigation">
+		<style>body { padding-top: 70px; }</style>
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">

@@ -4,7 +4,7 @@ def _template_user_panel(user_name,user_id):
 	yield """
 		<div class='panel panel-default'>
 			<div class='panel-heading'>
-				<a href='/posts?user=1'><span class="glyphicon glyphicon-user" />"""
+				<a href='/user?id=""",str(user_id),"""'><span class="glyphicon glyphicon-user" />"""
 	yield user_name
 	yield """</a>
 			</div>
