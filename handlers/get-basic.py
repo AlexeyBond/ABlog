@@ -4,6 +4,7 @@
 @GETRequestHandler('^/src$',template='SRCVIEW_ROOT')
 @GETRequestHandler('^/src/tree$',template='SRCVIEW_TREE')
 @GETRequestHandler('^/posts',template='VIEW-POSTS',parse_url_args=True)
+@GETRequestHandler('^/users',template='VIEW-USERS',parse_url_args=True)
 @GETRequestHandler('^/home',template='HOMEPAGE')
 @GETRequestHandler('^/login',template='LOGIN-PAGE',parse_url_args=True)
 @GETRequestHandler('^/about',template='ABOUTPAGE')

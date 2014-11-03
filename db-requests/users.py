@@ -23,6 +23,36 @@ def request__get_user_info(db,userid,**kwargs):
 		return None
 	return reqres[0]
 
+@dbRequestHandler('ABLOG-MAIN','GET-USERS')
+def request__get_users(db,first,count,**kwargs):
+	reqres = db._make_request(
+		"""
+		SELECT
+			user_id,user_name
+		FROM
+			{db_name}.USERS
+		ORDER
+			BY user_id
+		LIMIT {first},{count}
+		""",
+		('id','name'),
+		first=first,
+		count=count );
+	return reqres
+
+@dbRequestHandler('ABLOG-MAIN','GET-USERS-COUNT')
+def request__get_users_count(db,**kwargs):
+	reqres = db._make_request(
+		"""
+		SELECT
+			COUNT(*)
+		FROM
+			{db_name}.USERS;
+		""");
+	if reqres == None:
+		return None
+	return reqres[0][0]
+
 @dbRequestHandler('ABLOG-MAIN','GET-USER-NAME')
 def request__get_user_info(db,userid,**kwargs):
 	reqres = db._make_request(
