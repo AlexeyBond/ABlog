@@ -80,3 +80,14 @@ def request__modify_post(db,post_id,new_text,**kwargs):
 		""",
 		new_text=new_text,
 		post_id=post_id);
+
+@dbRequestHandler('ABLOG-MAIN','DELETE-POST')
+def request__delete_post(db,post_id,**kwargs):
+	return db._make_request(
+		"""
+		DELETE FROM
+			{db_name}.POSTS
+		WHERE
+			post_id={post_id}
+		""",
+		post_id=post_id);
