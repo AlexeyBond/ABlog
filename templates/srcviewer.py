@@ -20,14 +20,17 @@ def template_srcview_root(**kwargs):
 	yield """
 	<span class="glyphicon glyphicon-folder-open" /> /src
 	<ul>"""
-	flist = os.listdir(rel2absPath('.'))
+	#flist = os.listdir(rel2absPath('.'))
+	flist = open('./srclist.txt','r')
 	for x in flist:
+		x = x.replace('\n','').replace('\r','')
 		if x.endswith('.py'):
 			yield """<li><a href='/src/view?file="""
 			yield x
 			yield """' target='SRCVIEW_FRAME_CODEVIEW'>  """
 			yield x
 			yield """</a></li>"""
+	flist.close( )
 	yield """</ul>"""
 	yield """<p><a href='/resource/srcview-about.html' target='SRCVIEW_FRAME_CODEVIEW'>[about]</a></p>"""
 	###
