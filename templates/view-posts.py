@@ -98,8 +98,10 @@ def template_Posts_page(url_args,session=None,**kwargs):
 				</div>
 				<div class='panel-footer' align='right'>"""
 			### Creation time and user name
-			yield 'Написано ',str(post['ctime']),' пользователем '
-			yield '<a href="/user?id=',str(post['uid']),'">@',post['user'],'</a>'
+			yield 'Написано ',str(post['ctime']),
+			if post['ctime'] != post['mtime']:
+				yield ' (изменено ',str(post['mtime']),')'
+			yield ' пользователем <a href="/user?id=',str(post['uid']),'">@',post['user'],'</a>'
 			###
 			yield """</div></div>"""
 		yield pageswitch( )
