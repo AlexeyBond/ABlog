@@ -107,7 +107,7 @@ def request__set_user_avatar_path(db,userid,path,**kwargs):
 	db._make_request(
 		"""
 		UPDATE
-			ABLOG_DB.USERS
+			{db_name}.USERS
 				SET user_avatar_path="{path}"
 			WHERE
 				user_id={userid};
@@ -120,12 +120,12 @@ def request__set_user_avatar_path(db,userid,email,about,**kwargs):
 	if about == None:
 		about = 'NULL'
 	else:
-		about = '\"' + about.replace('\"','\\\"') + '\"'
+		about = '\"' + about.replace('\\','\\\\').replace('\"','\\\"') + '\"'
 	#
 	if email == None or email == '':
 		email = 'NULL'
 	else:
-		email = '\"' + email.replace('\"','\\\"') + '\"'
+		email = '\"' + email.replace('\\','\\\\').replace('\"','\\\"') + '\"'
 	#
 	db._make_request(
 		"""

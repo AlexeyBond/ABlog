@@ -44,3 +44,39 @@ def request__get_posts_count(db,user_id=None,**kwargs):
 		""",
 		user_condition=user_condition);
 	return reqres[0][0]
+
+@dbRequestHandler('ABLOG-MAIN','GET-POST')
+def request__get_post(db,post_id,**kwargs):
+	reqres = db._make_request(
+		"""
+		SELECT
+			user_name,
+			post_ctime,post_mtime,user_id,post_content,post_id
+		FROM
+			{db_name}.ALLPOSTS
+		WHERE
+			post_id={post_id}
+		""",
+		('user','ctime','mtime','uid','text','post_id'),
+		post_id = post_id);
+	if reqres == None:
+		return None;
+	if len(reqres) != 1:
+		return None;
+	return reqres[0]
+
+@dbRequestHandler('ABLOG-MAIN','MODIFY-POST')
+def request__modify_post(db,post_id,new_text,**kwargs):
+	new_text = new_text.replace('\\','\\\\').replace('\"','\\\"')
+	return db._make_request(
+		"""
+		UPDATE
+			{db_name}.POSTS
+				SET 
+					post_content="{new_text}",
+					post_mtime=CURRENT_TIMESTAMP
+			WHERE
+				post_id={post_id};
+		""",
+		new_text=new_text,
+		post_id=post_id);

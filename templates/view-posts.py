@@ -84,10 +84,10 @@ def template_Posts_page(url_args,session=None,**kwargs):
 			if post['uid'] == session_user:
 				yield """
 					<div class='panel-heading'>
-						<a class='btn btn-default btn-xs' href='/delete?post="""
+						<a class='btn btn-default btn-xs' href='/delete-post?id="""
 				yield str(post['post_id'])
 				yield """'>Удалить</a>
-						<a class='btn btn-default btn-xs' href='/edit?post="""
+						<a class='btn btn-default btn-xs' href='/edit-post?id="""
 				yield str(post['post_id'])
 				yield """'>Редактировать...</a>
 					</div>"""

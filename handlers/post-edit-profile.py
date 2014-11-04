@@ -1,7 +1,7 @@
 # coding=UTF-8
 
 @POSTRequestHandler('^/edit-profile')
-def post__post(handler,**kwargs):
+def post__edit_profile(handler,**kwargs):
 	session = makeDBRequest('IDENTIFY-USER-BY-COOKIES',cookies=handler.cookies)
 	form = handler.do_POST_parse_form( )
 	url_args = parseUrlParameters(handler.path)
